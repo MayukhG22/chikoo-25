@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown to Chikoo's 25th</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --gold: #ffd700;
+      --rose-gold: #b76e79;
+      --text-main: #f8f9fa;
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.2);
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-main);
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    }
+
+    /* Twinkling Star Background */
+    .stars {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -2;
+      background-image: 
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 4px),
+        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
+        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px);
+      background-size: 550px 550px, 350px 350px, 250px 250px;
+      background-position: 0 0, 40px 60px, 130px 270px;
+      animation: twinkle 15s linear infinite;
+    }
+    @keyframes twinkle {
+      0% { opacity: 0.8; }
+      50% { opacity: 1; }
+      100% { opacity: 0.8; }
+    }
+
+    /* Floating Birthday Elements & SRK Poses */
+    .floating-decor {
+      position: fixed;
+      z-index: -1;
+      font-size: 3rem;
+      opacity: 0;
+      animation: floatUp 25s linear infinite;
+    }
+    
+    /* Styling for the SRK images to make them look magical and blended */
+    .floating-decor img {
+      width: 120px;
+      height: auto;
+      opacity: 0.5; /* Keeps him slightly transparent against the sky */
+      filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.4));
+    }
+
+    /* Distribution of emojis and images */
+    .d1 { left: 10%; bottom: -10%; animation-duration: 25s; animation-delay: 0s; }
+    .d2 { left: 80%; bottom: -10%; animation-duration: 20s; animation-delay: 5s; }
+    .d3 { left: 30%; bottom: -10%; font-size: 2.5rem; animation-duration: 28s; animation-delay: 2s; } /* Cake */
+    .d4 { left: 70%; bottom: -10%; font-size: 2.5rem; animation-duration: 22s; animation-delay: 12s; } /* Cake */
+    .d5 { left: 50%; bottom: -10%; animation-duration: 26s; animation-delay: 8s; } /* SRK 1 */
+    .d6 { left: 15%; bottom: -10%; animation-duration: 24s; animation-delay: 16s; } /* SRK 2 */
+    .d7 { left: 85%; bottom: -10%; animation-duration: 27s; animation-delay: 20s; } /* SRK 3 */
+    .d8 { left: 40%; bottom: -10%; animation-duration: 21s; animation-delay: 10s; } /* Balloon */
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.6; }
+      90% { opacity: 0.6; }
+      100% { transform: translateY(-120vh) rotate(45deg); opacity: 0; }
+    }
+
+    #main-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      padding: 3rem 1rem;
+      box-sizing: border-box;
+      z-index: 10;
+    }
+    
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+      background: var(--glass-bg);
+      padding: 1.5rem 3rem;
+      border-radius: 20px;
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    }
+    
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.5rem;
+      color: var(--gold);
+      margin: 0 0 10px 0;
+      text-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+      font-weight: 400;
+    }
+    
+    #timer {
+      font-size: 1.5rem;
+      color: #fff;
+      font-weight: 300;
+      letter-spacing: 2px;
+    }
+
+    /* Golden Fuse Mechanics */
+    .fuse-container {
+      position: relative;
+      width: 6px;
+      height: 450px;
+      background: rgba(255, 255, 255, 0.1);
+      margin: 2rem 0 5rem 0;
+      border-radius: 5px;
+      box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+    }
+    .fuse-burnt {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(to bottom, #333, var(--gold));
+      border-radius: 5px;
+      box-shadow: 0 0 10px var(--gold);
+    }
+    .spark {
+      position: absolute;
+      left: -12px;
+      width: 30px;
+      height: 30px;
+      background: radial-gradient(circle, #fff 0%, #ffeb3b 40%, #ff9800 80%, transparent 100%);
+      border-radius: 50%;
+      box-shadow: 0 0 20px #ff9800, 0 0 40px #ffeb3b;
+      transform: translateY(-50%);
+      transition: top 1s linear;
+      z-index: 2;
+      animation: flicker 0.1s infinite alternate;
+    }
+    @keyframes flicker {
+      0% { transform: translateY(-50%) scale(0.9); opacity: 0.8; }
+      100% { transform: translateY(-50%) scale(1.1); opacity: 1; }
+    }
+
+    /* Premium Checkpoints */
+    .checkpoint {
+      position: absolute;
+      left: 30px;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(5px);
+      color: #888;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: not-allowed;
+      border: 1px solid #444;
+      transition: all 0.4s ease;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .checkpoint.active {
+      background: var(--glass-bg);
+      color: #fff;
+      cursor: pointer;
+      border: 1px solid var(--gold);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+      animation: pulse 2s infinite;
+    }
+    .checkpoint.active:hover {
+      transform: translateY(-50%) scale(1.05);
+      background: rgba(255, 215, 0, 0.2);
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.2); }
+      50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); }
+      100% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.2); }
+    }
+
+    /* Rocket at the bottom */
+    .rocket {
+      position: absolute;
+      bottom: -45px;
+      left: -22px;
+      font-size: 3rem;
+      filter: drop-shadow(0 0 10px rgba(255,152,0,0.5));
+    }
+
+    /* Glass Modal */
+    #modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      box-sizing: border-box;
+    }
+    .modal-content {
+      background: rgba(20, 20, 35, 0.9);
+      padding: 2.5rem;
+      border-radius: 15px;
+      max-width: 500px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+      color: #fff;
+      border: 1px solid var(--gold);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 0 15px rgba(255,215,0,0.1);
+      position: relative;
+    }
+    .modal-content h2 {
+      font-family: 'Great Vibes', cursive;
+      margin-top: 0;
+      color: var(--gold);
+      font-size: 2.5rem;
+      text-align: center;
+      font-weight: 400;
+    }
+    .close-btn {
+      background: linear-gradient(135deg, var(--gold), #ffaa00);
+      color: #000;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      font-family: 'Poppins', sans-serif;
+      margin-top: 2rem;
+      width: 100%;
+      transition: opacity 0.3s;
+    }
+    .close-btn:hover {
+      opacity: 0.9;
+    }
+
+    /* Birthday Blast Screen */
+    #birthday-screen {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(ellipse at center, #1b2735 0%, #000 100%);
+      z-index: 200;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+    }
+    #birthday-message {
+      font-family: 'Great Vibes', cursive;
+      font-size: 5rem;
+      color: #fff;
+      text-shadow: 0 0 20px var(--gold), 0 0 40px #ff9800, 0 0 60px #ff0055;
+      z-index: 201;
+      padding: 0 1rem;
+      animation: fadeIn 3s ease-in;
+    }
+    canvas {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 200;
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    p { line-height: 1.8; margin-bottom: 12px; font-weight: 300; }
+  </style>
+</head>
+<body>
+
+  <!-- Background Floating Elements: Balloons, Cakes, Stars, and SRK -->
+  <div class="stars"></div>
+  <div class="floating-decor d1">🎈</div>
+  <div class="floating-decor d2">✨</div>
+  <div class="floating-decor d3">🎂</div>
+  <div class="floating-decor d4">🍰</div>
+  
+  <!-- SRK Image Slots -->
+  <div class="floating-decor d5"><img src="srk1.png" alt="SRK" onerror="this.style.display='none'"></div>
+  <div class="floating-decor d6"><img src="srk2.png" alt="SRK" onerror="this.style.display='none'"></div>
+  <div class="floating-decor d7"><img src="srk3.png" alt="SRK" onerror="this.style.display='none'"></div>
+  
+  <div class="floating-decor d8">🎈</div>
+
+  <div id="main-content">
+    <header>
+      <h1>Countdown to Chikoo's 25th</h1>
+      <div id="timer">Calculating time...</div>
+    </header>
+
+    <div class="fuse-container">
+      <div class="fuse-burnt" id="fuse-burnt"></div>
+      <div class="spark" id="spark"></div>
+      
+      <!-- Checkpoints positioned by percentage -->
+      <div class="checkpoint" id="cp-15" style="top: 25%" onclick="openModal('day15')">
+        <span class="icon">🔒</span> 15 Days Left
+      </div>
+      <div class="checkpoint" id="cp-10" style="top: 50%" onclick="openModal('day10')">
+        <span class="icon">🔒</span> 10 Days Left
+      </div>
+      <div class="checkpoint" id="cp-5" style="top: 75%" onclick="openModal('day5')">
+        <span class="icon">🔒</span> 5 Days Left
+      </div>
+      
+      <div class="rocket">🧨</div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal">
+    <div class="modal-content">
+      <h2 id="modal-title">Title</h2>
+      <div id="modal-body">Content</div>
+      <button class="close-btn" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <!-- Midnight Blast Screen -->
+  <div id="birthday-screen">
+    <canvas id="fireworks"></canvas>
+    <div id="birthday-message">Happy 25th Birthday Chikoo!</div>
+  </div>
+
+  <script>
+    const startDate = new Date("September 8, 2026 00:00:00").getTime();
+    const bday = new Date("September 28, 2026 00:00:00").getTime();
+    const totalDuration = bday - startDate;
+
+    const content = {
+      day15: {
+        title: "15 Details I Notice About You",
+        body: `<p>1. The exact tone of your voice when you are sleepy.<br>
+        2. How your face lights up when you talk about something you love.<br>
+        3. The specific way you type when you are excited.<br>
+        4. How the nickname Chikoo suits your personality perfectly.<br>
+        5. Your patience when things don't go exactly to plan.<br>
+        6. The way you naturally care for the people around you.<br>
+        7. How you look in candid photos when you aren't posing.<br>
+        8. The random jokes and references only we understand.<br>
+        9. Your ability to make a completely normal day feel like an event.<br>
+        10. The way you handle stress and keep moving forward.<br>
+        11. How easy and safe it feels just to sit in silence with you.<br>
+        12. Your subtle facial expressions when you are trying not to laugh.<br>
+        13. The excitement you show for even the smallest plans we make.<br>
+        14. How you almost always know exactly what to say to me.<br>
+        15. The simple fact that you are exactly who you are.</p>`
+      },
+      day10: {
+        title: "10 Promises for Your 25th",
+        body: `<p>1. I promise to always be your loudest cheerleader.<br>
+        2. I promise to listen to your rants after a long, exhausting day.<br>
+        3. I promise to celebrate your smallest victories and stand by you in every challenge.<br>
+        4. I promise to be your safe space when the world feels too loud.<br>
+        5. I promise to hold your hand through the frustrating days.<br>
+        6. I promise to keep making you laugh, even when my jokes are terrible.<br>
+        7. I promise to support your biggest, wildest dreams.<br>
+        8. I promise to never let a fight last longer than it needs to.<br>
+        9. I promise to always choose us, every single day.<br>
+        10. I promise to love you a little more tomorrow than I do today.</p>`
+      },
+      day5: {
+        title: "5 Shayaris For You",
+        body: `<p><strong>I was lucky to meet you</strong><br>
+        In haathon ki lakeeron mein kahan thi aisi daulat,<br>
+        Tumhara milna jaise khuda ne naseeb dobara likh diya ho.</p><br>
+        <p><strong>You are everything for my life</strong><br>
+        Zameen se aasmaan tak bas ek hi aarzoo hai meri,<br>
+        Meri toh puri kaaynaat tumhare wajood se mukammal hai.</p><br>
+        <p><strong>You are the relief to my pain</strong><br>
+        Zindagi ke safar mein thakawat bohat thi,<br>
+        Tum mile toh laga dil ke har dard ko marham mil gaya.</p><br>
+        <p><strong>You understand me like no one else</strong><br>
+        Labon se kuch na kahu, fir bhi sab padh leti ho,<br>
+        Meri khamoshi ko tum se behtar kaun samajh sakta hai.</p><br>
+        <p><strong>I want you to be my forever</strong><br>
+        Bas ek khwahish hai is dil ki aakhri saans tak,<br>
+        Raaste chahe jo hon, humsafar sirf tum raho.</p>`
+      }
+    };
+
+    function updateLogic() {
+      const now = new Date().getTime();
+      const distanceToBday = bday - now;
+      const elapsed = now - startDate;
+
+      let progress = (elapsed / totalDuration) * 100;
+      if (progress < 0) progress = 0;
+      if (progress > 100) progress = 100;
+
+      if (distanceToBday > 0) {
+        const days = Math.floor(distanceToBday / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distanceToBday % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distanceToBday % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distanceToBday % (1000 * 60)) / 1000);
+        
+        const h = hours < 10 ? "0" + hours : hours;
+        const m = minutes < 10 ? "0" + minutes : minutes;
+        const s = seconds < 10 ? "0" + seconds : seconds;
+        
+        document.getElementById("timer").innerHTML = `${days}d ${h}h ${m}m ${s}s`;
+        document.getElementById("spark").style.top = `${progress}%`;
+        document.getElementById("fuse-burnt").style.height = `${progress}%`;
+        
+        activateCheckpoint("cp-15", progress >= 25);
+        activateCheckpoint("cp-10", progress >= 50);
+        activateCheckpoint("cp-5", progress >= 75);
+      } else {
+        document.getElementById("main-content").style.display = "none";
+        document.getElementById("birthday-screen").style.display = "flex";
+        startFireworks();
+      }
+    }
+
+    function activateCheckpoint(id, isReady) {
+      const element = document.getElementById(id);
+      const icon = element.querySelector('.icon');
+      if (isReady && !element.classList.contains("active")) {
+        element.classList.add("active");
+        icon.innerHTML = "💌";
+      }
+    }
+
+    function openModal(dayKey) {
+      const el = document.getElementById(`cp-${dayKey.replace('day', '')}`);
+      if (!el.classList.contains("active")) return; 
+      
+      document.getElementById("modal-title").innerHTML = content[dayKey].title;
+      document.getElementById("modal-body").innerHTML = content[dayKey].body;
+      document.getElementById("modal").style.display = "flex";
+    }
+    
+    function closeModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+
+    setInterval(updateLogic, 1000);
+    updateLogic();
+
+    function startFireworks() {
+      const canvas = document.getElementById('fireworks');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      let particles = [];
+      const colors = ['#ffd700', '#ff9800', '#ff0055', '#fff', '#b76e79'];
+
+      function createFirework() {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * (canvas.height / 2);
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        for (let i = 0; i < 60; i++) {
+          particles.push({
+            x: x, y: y,
+            vx: (Math.random() - 0.5) * (Math.random() * 15),
+            vy: (Math.random() - 0.5) * (Math.random() * 15),
+            alpha: 1, color: color
+          });
+        }
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        particles.forEach((p, index) => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.08; 
+          p.alpha -= 0.015;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${hexToRgb(p.color)}, ${p.alpha})`;
+          ctx.fill();
+          if (p.alpha <= 0) particles.splice(index, 1);
+        });
+
+        if (Math.random() < 0.08) createFirework();
+      }
+
+      function hexToRgb(hex) {
+        let bigint = parseInt(hex.replace('#', ''), 16);
+        let r = (bigint >> 16) & 255;
+        let g = (bigint >> 8) & 255;
+        let b = bigint & 255;
+        return `${r},${g},${b}`;
+      }
+      animate();
+    }
+  </script>
+</body>
+</html>
