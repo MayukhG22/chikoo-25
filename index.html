@@ -56,23 +56,21 @@
       animation: floatUp 25s linear infinite;
     }
     
-    /* Styling for the SRK images to make them look magical and blended */
     .floating-decor img {
       width: 120px;
       height: auto;
-      opacity: 0.5; /* Keeps him slightly transparent against the sky */
+      opacity: 0.5;
       filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.4));
     }
 
-    /* Distribution of emojis and images */
     .d1 { left: 10%; bottom: -10%; animation-duration: 25s; animation-delay: 0s; }
     .d2 { left: 80%; bottom: -10%; animation-duration: 20s; animation-delay: 5s; }
-    .d3 { left: 30%; bottom: -10%; font-size: 2.5rem; animation-duration: 28s; animation-delay: 2s; } /* Cake */
-    .d4 { left: 70%; bottom: -10%; font-size: 2.5rem; animation-duration: 22s; animation-delay: 12s; } /* Cake */
-    .d5 { left: 50%; bottom: -10%; animation-duration: 26s; animation-delay: 8s; } /* SRK 1 */
-    .d6 { left: 15%; bottom: -10%; animation-duration: 24s; animation-delay: 16s; } /* SRK 2 */
-    .d7 { left: 85%; bottom: -10%; animation-duration: 27s; animation-delay: 20s; } /* SRK 3 */
-    .d8 { left: 40%; bottom: -10%; animation-duration: 21s; animation-delay: 10s; } /* Balloon */
+    .d3 { left: 30%; bottom: -10%; font-size: 2.5rem; animation-duration: 28s; animation-delay: 2s; }
+    .d4 { left: 70%; bottom: -10%; font-size: 2.5rem; animation-duration: 22s; animation-delay: 12s; }
+    .d5 { left: 50%; bottom: -10%; animation-duration: 26s; animation-delay: 8s; }
+    .d6 { left: 15%; bottom: -10%; animation-duration: 24s; animation-delay: 16s; }
+    .d7 { left: 85%; bottom: -10%; animation-duration: 27s; animation-delay: 20s; }
+    .d8 { left: 40%; bottom: -10%; animation-duration: 21s; animation-delay: 10s; }
 
     @keyframes floatUp {
       0% { transform: translateY(0) rotate(0deg); opacity: 0; }
@@ -296,7 +294,7 @@
   <div class="floating-decor d3">🎂</div>
   <div class="floating-decor d4">🍰</div>
   
-  <!-- SRK Image Slots -->
+  <!-- SRK Image Slots with Corrected Filenames -->
   <div class="floating-decor d5"><img src="srk.1.png" alt="SRK" onerror="this.style.display='none'"></div>
   <div class="floating-decor d6"><img src="srk.2.png" alt="SRK" onerror="this.style.display='none'"></div>
   <div class="floating-decor d7"><img src="srk.3.png" alt="SRK" onerror="this.style.display='none'"></div>
@@ -344,8 +342,9 @@
   </div>
 
   <script>
+    // Timer fully restored to actual birthday
     const startDate = new Date("September 8, 2026 00:00:00").getTime();
-    const bday = new Date().getTime() + 15000;
+    const bday = new Date("September 28, 2026 00:00:00").getTime();
     const totalDuration = bday - startDate;
 
     const content = {
@@ -401,7 +400,8 @@
         <p><span style="color: var(--gold); font-family: 'Great Vibes', cursive; font-size: 2rem;">Mera Humsafar</span><br>
         Bas ek khwahish hai is dil ki aakhri saans tak,<br>
         Raaste chahe jo hon, humsafar sirf tum raho.</p>`
-      }    };
+      }
+    };
 
     function updateLogic() {
       const now = new Date().getTime();
@@ -447,7 +447,8 @@
 
     function openModal(dayKey) {
       const el = document.getElementById(`cp-${dayKey.replace('day', '')}`);
-      //if (!el.classList.contains("active")) return; 
+      // Lock mechanism is restored - she cannot click early!
+      if (!el.classList.contains("active")) return; 
       
       document.getElementById("modal-title").innerHTML = content[dayKey].title;
       document.getElementById("modal-body").innerHTML = content[dayKey].body;
