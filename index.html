@@ -345,7 +345,7 @@
 
   <script>
     const startDate = new Date("September 8, 2026 00:00:00").getTime();
-    const bday = new Date("September 28, 2026 00:00:00").getTime();
+    const bday = new Date().getTime() + 15000;
     const totalDuration = bday - startDate;
 
     const content = {
@@ -444,7 +444,7 @@
 
     function openModal(dayKey) {
       const el = document.getElementById(`cp-${dayKey.replace('day', '')}`);
-      if (!el.classList.contains("active")) return; 
+      //if (!el.classList.contains("active")) return; 
       
       document.getElementById("modal-title").innerHTML = content[dayKey].title;
       document.getElementById("modal-body").innerHTML = content[dayKey].body;
